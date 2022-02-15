@@ -1,6 +1,8 @@
 package com.company;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Trie {
 
@@ -116,5 +118,33 @@ public class Trie {
             root.removeChild(ch);
         }
 
+    }
+
+    public List<String> findWords(String prefix){
+        if (prefix == null) return null;
+        List<String> words = new ArrayList<String>();
+        var lastNode = findLastNodeOf(prefix);
+        findWords(lastNode, prefix, words);
+        return words;
+    }
+
+    private void findWords(TrieNode root, String prefix, List<String> words){
+        if (root == null) return;
+        if(root.isEndOfWord){
+            words.add(prefix);
+        }
+        for( var child: root.getChildren()){
+            findWords(child, prefix + child.value, words);
+        }
+    }
+
+    private TrieNode findLastNodeOf(String prefix){
+        var current = root;
+        for(var ch: prefix.toCharArray()){
+            var child = current.getChild(ch);
+            if(child == null) return null;
+            current = child;
+        }
+        return current;
     }
 }
