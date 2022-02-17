@@ -121,10 +121,12 @@ public class Trie {
     }
 
     public List<String> findWords(String prefix){
-        if (prefix == null) return null;
+        if (prefix == null || prefix.length() < 3) return null;
         List<String> words = new ArrayList<String>();
         var lastNode = findLastNodeOf(prefix);
         findWords(lastNode, prefix, words);
+
+        // may want to sort word as they are coming in to reduce time
         return words;
     }
 
