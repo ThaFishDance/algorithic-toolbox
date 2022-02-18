@@ -1,13 +1,19 @@
 package com.company;
 
-import java.util.Arrays;
-
 public class Main {
 
     public static void main(String[] args) {
-        LeetArray arr = new LeetArray(new int[]{-2,1,-3,4,-1,2,1,-5,4});
-        int result = arr.maxSubArray();
-        System.out.println(result);
+        DirectedGraph directedGraph = new DirectedGraph();
+        directedGraph.addNode("Houston");
+        directedGraph.addNode("Las Vegas");
+        directedGraph.addNode("Seattle");
+        directedGraph.addNode("Portland");
+        directedGraph.addNode("JFK");
+        directedGraph.addEdge("Houston", "Seattle");
+        directedGraph.addEdge("Houston", "Las Vegas");
+        directedGraph.addEdge("Seattle", "Portland");
+        directedGraph.addEdge("Portland", "JFK");
+        directedGraph.traverseDepthFirst("Houston");
     }
 
 
