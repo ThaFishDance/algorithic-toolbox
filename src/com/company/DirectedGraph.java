@@ -3,6 +3,7 @@ package com.company;
 import java.util.*;
 
 public class DirectedGraph {
+
     private class Node {
         String label;
 
@@ -46,7 +47,7 @@ public class DirectedGraph {
         traverseDepthFirst(node, new HashSet<>());
     }
 
-    private void traverseDepthFirst(Node root, HashSet<Node> visited){
+    private void traverseDepthFirst(Node root, Set<Node> visited){
         System.out.println(root);
         visited.add(root);
         for( var node: adjacencyList.get(root)){
@@ -54,6 +55,58 @@ public class DirectedGraph {
                 traverseDepthFirst(node, visited);
             }
         }
+
+    }
+
+    public List<String> topologicalSort(){
+        Stack<Node> stack = new Stack<>();
+        Set<Node> visited = new HashSet<>();
+        for(var node: nodes.values()){
+            topologicalSort(node, stack, visited);
+        }
+
+        List<String> sorted = new ArrayList<>();
+        while(!stack.isEmpty()){
+            sorted.add(stack.pop().label);
+        }
+        return sorted;
+    }
+
+    private void topologicalSort(Node node, Stack<Node> stack, Set<Node> visited) {
+        if(visited.contains(node)) return;
+
+        // add to visited
+        visited.add(node);
+
+        // go through all neighbors until no more neighbors exist
+        for(var neighbor: adjacencyList.get(node)){
+            topologicalSort(neighbor, stack, visited);
+        }
+
+        // add to stack
+        stack.push(node);
+    }
+
+    public boolean hasCycle() {
+        // three sets: all, visiting, visited
+        Set<Node> all = new HashSet<>();
+        all.addAll(nodes.values());
+
+        Set<Node> visiting = new HashSet<>();
+        Set<Node> visited = new HashSet<>();
+
+        while(!all.isEmpty()){
+            // go through all nodes
+            var current = all.toArray()[0];
+        }
+        return false;
+    }
+
+    private boolean hasCycle(Node node, Set<Node> all, Set<Node> visiting,
+                             Set<Node> visited){
+        all.remove(node);
+        visiting.add(node);
+        return false;
     }
 
     public void print(){

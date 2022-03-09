@@ -1,20 +1,20 @@
 package com.company;
 
+import java.util.*;
+
 public class Main {
 
     public static void main(String[] args) {
-        DirectedGraph directedGraph = new DirectedGraph();
-        directedGraph.addNode("Houston");
-        directedGraph.addNode("Las Vegas");
-        directedGraph.addNode("Seattle");
-        directedGraph.addNode("Portland");
-        directedGraph.addNode("JFK");
-        directedGraph.addEdge("Houston", "Seattle");
-        directedGraph.addEdge("Houston", "Las Vegas");
-        directedGraph.addEdge("Seattle", "Portland");
-        directedGraph.addEdge("Portland", "JFK");
-        directedGraph.traverseDepthFirst("Houston");
+        DirectedGraph graph = new DirectedGraph();
+        graph.addNode("A");
+        graph.addNode("B");
+        graph.addNode("C");
+        graph.addNode("D");
+        graph.addEdge("A", "B");
+        graph.addEdge("B", "C");
+        graph.addEdge("C", "D");
+        graph.addEdge("A", "C");
+        var result = graph.hasCycle();
+        System.out.println(result);
     }
-
-
 }
